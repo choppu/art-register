@@ -1,0 +1,105 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  font-size: 62.5%;
+  font-size: 1em;
+  color: rgb(55, 55, 55);
+  line-height: 1.3em;
+  font-family: 'Antic Didone', serif;
+  font-weight: 300;
+  background: white;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a {
+  font: inherit;
+  color: inherit;
+  text-decoration: none;
+}
+
+input[disabled="disabled"], input[disabled="disabled"]:hover {
+  opacity: 0.7;
+}
+
+.group:before, .group:after {
+  content: " ";
+  display: table;
+}
+.group:after {
+  clear: both;
+}
+.group {
+  zoom: 1;
+}
+
+.art__container {
+  background-size: 100%;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.art__btn-container {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  min-height: 95vh;
+}
+
+.art__btn-lrg {
+  border: none;
+  font-family: 'Antic Didone', serif;
+  background: rgb(43, 102, 112);
+  color: white;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 1.5em;
+  padding: .6em 1.5em;
+  box-sizing: border-box;
+  box-shadow: 0 14px 28px rgba(180, 180, 180,0.15), 0 10px 10px rgba(180, 180, 180,0.12);
+  outline: none;
+}
+
+.art__btn-lrg:hover {
+  background: rgb(43, 102, 112);
+  background: rgb(100, 139, 145);
+}
