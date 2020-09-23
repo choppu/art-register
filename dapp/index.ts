@@ -16,24 +16,10 @@ export async function init() : Promise<void> {
   signer = provider.getSigner();
 
   let factory = new ethers.ContractFactory(artArtifact.abi, artArtifact.bytecode, signer);
-  let contractCreatePage = document.getElementById("create-contract-page");
-  if(contractCreatePage) {
-    deployArtContract(factory);
-  }
+  deployArtContract(factory);
 }
 
 export async function deployArtContract(factory: any) : Promise<void> {
-  let bgImage =  require("../dapp/img/bg.jpg");
-  let btn = document.getElementById("deploy-btn");
-
-  document.getElementById("index-container").style.backgroundImage = `url(${bgImage.default})`;
-
-  btn.addEventListener("click", async (e) => {
-    let contract = await factory.deploy();
-    await contract.deployed();
-    console.log(contract);
-    e.preventDefault();
-  });
 }
 
 window.onload = init;
