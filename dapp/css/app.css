@@ -78,28 +78,29 @@ input[disabled="disabled"], input[disabled="disabled"]:hover {
 
 .art__btn-container {
   width: 100%;
-  text-align: center;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  min-height: 95vh;
 }
 
-.art__btn-lrg {
+.art__btn {
   border: none;
   font-family: 'Antic Didone', serif;
-  background: rgb(43, 102, 112);
+  background: rgb(14, 78, 87);
   color: white;
   display: inline-block;
   text-transform: uppercase;
-  font-size: 1.5em;
-  padding: .6em 1.5em;
+  font-size: 1.1em;
+  padding: .5em 1.5em;
   box-sizing: border-box;
   box-shadow: 0 14px 28px rgba(180, 180, 180,0.15), 0 10px 10px rgba(180, 180, 180,0.12);
   outline: none;
 }
 
-.art__btn-lrg:hover {
+.art__btn:hover {
   background: rgb(43, 102, 112);
   background: rgb(100, 139, 145);
+}
+
+.art__btn:disabled {
+  background: rgb(43, 102, 112);
+  background: rgb(100, 139, 145);
+  cursor: default;
 }
