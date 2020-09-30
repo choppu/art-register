@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Art Catalogue | Create Art</title>
+  <link
+    href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Antic+Didone&display=swap" rel="stylesheet">
+</head>
+<body id="create-art-page" class="art__main-container float">
+  <div class="art__right-container">
+    <header class="group">
+      <div class="art__menu-list-container group">
+        <ul class="art__menu-list group">
+          <li class="art__menu-list-item art__menu-1"><a href="" class="art__menu-list-item-link">My Arts</a></li>
+          <li class="art__menu-list-item art__menu-2"><a href="" class="art__menu-list-item-link">Catalogue</a></li>
+          <li class="art__menu-list-item art__menu-3"><a href="" class="art__menu-list-item-link">Create Art</a></li>
+        </ul>
+      </div>
+    </header>
+    <div class="art__container" id="index-container">
+      <div class="art__form-container">
+        <div class="art__form-item-container group">
+          <label for="art-title" class="art__form-item-label">Title</label>
+          <input type="text" name="art-title" id="art-title" class="art__form-item-input art__form-item" placeholder="Title" required>
+        </div>
+        <div class="art__form-item-container group">
+          <label for="art-author" class="art__form-item-label">Author</label>
+          <input type="text" name="art-author" id="art-author" class="art__form-item-input art__form-item" placeholder="Author" required>
+        </div>
+        <div class="art__form-item-container group">
+          <label for="art-date" class="art__form-item-label">Creation date</label>
+          <input type="date" name="art-date" id="art-date" class="art__form-item-input-date art__form-item" required>
+        </div>
+        <div class="art__form-item-container group">
+          <label for="art-thumb" class="art__form-item-label">Thumbnail</label>
+          <div class="art__file-field group">
+            <span class="art__input-file-label">
+              Upload File
+            </span>
+            <input type="file" name="art-thumb" class="art__form-item-input-file art__form-item" id="art-thumb" accept="image/png, image/jpeg" required>
+        </div>
+        <span id="file-path-label" class="art__file-path-label">No file selected</span>
+        </div>
+        <div class="art__form-item-container group">
+          <label for="art-description" class="art__form-item-label">Your thoughts</label>
+          <textarea name="art-description" id="art-description" class="art__form-item-ta art__form-item" required></textarea>
+        </div>
+        <div class="art__btn-container">
+          <button class="art__btn" id="register-btn">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="art__left-container">
+    <img alt="Art Img" class="art__thumb-default-img" id="art-img-default">
+  </div>
+</body>
+</html>

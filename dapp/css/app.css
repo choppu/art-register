@@ -31,6 +31,7 @@ body {
   font-family: 'Antic Didone', serif;
   font-weight: 300;
   background: white;
+  position: static;
 }
 ol, ul {
   list-style: none;
@@ -69,15 +70,168 @@ input[disabled="disabled"], input[disabled="disabled"]:hover {
   zoom: 1;
 }
 
-.art__container {
-  background-size: 100%;
+.art__left-container {
+  float: left;
+  width: 45%;
   height: 100vh;
-  background-repeat: no-repeat;
-  background-position: center;
+  overflow: hidden;
+}
+
+.art__right-container {
+  float: right;
+  width: 48%;
+}
+
+.art__thumb-default-img {
+  width: 100%;
+}
+
+.art__menu-list-container {
+  width: 100%;
+  margin: 1.5em 0;
+  box-sizing: border-box;
+  padding-right: 10%;
+  font-family: 'Limelight', cursive;
+}
+
+.art__menu-1 {
+  font-size: 1.2em;
+}
+
+.art__menu-2 {
+  font-size: 1.4em;
+}
+
+.art__menu-3 {
+  font-size: 1.6em;
+}
+
+.art__menu-list {
+  width: 90%;
+  padding: 1em 0;
+  box-sizing: border-box;
+  text-align: right;
+  margin-right: 10%;
+}
+
+.art__menu-list-item {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: .2em 0 .2em 1em;
+}
+
+.art__menu-list-item-link {
+  text-transform: uppercase;
+  font-size: .85em;
+}
+
+.art__menu-list-item-link:hover {
+  border-bottom: solid 1px rgb(31, 91, 99);
+}
+
+.art__form-container {
+  width: 90%;
+  margin-top: 4em;
+  box-sizing: border-box;
+  float: right;
+  padding-right: 20%;
+}
+
+.art__form-item-container {
+  padding: .4em 0;
+  box-sizing: border-box;
+}
+
+.art__form-item-label {
+  display: block;
+  text-transform: uppercase;
+  font-size: .7em;
+  font-weight: bold;
+}
+
+.art__form-item-input {
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: solid 1px rgb(55, 55, 55);
+  margin: .3em 0;
+  font-family: 'Antic Didone', serif;
+  padding: .1em .5em;
+  box-sizing: border-box;
+  outline: none;
+  font-size: .75em;
+}
+
+.art__form-item-input-date {
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: solid 1px rgb(55, 55, 55);
+  margin: .3em 0;
+  font-family: 'Antic Didone', serif;
+  padding: .1em .5em;
+  box-sizing: border-box;
+  outline: none;
+  font-size: .75em;
+}
+
+.art__file-field {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  width: 150px;
+  margin: .3em 0;
+}
+
+.art__input-file-label {
+  z-index: 0;
+  display: inline-block;
+  width: 100%;
+  background: rgb(14, 78, 87);
+  cursor: pointer;
+  color: #fff;
+  padding: .3em 0;
+  font-family: 'Antic Didone', serif;
+  font-size: .75em;
+  box-shadow: 0 3px 3px rgba(0,0,0,0.05), 0 3px 6px rgba(0,0,0,0.1);
+  text-transform: uppercase;
+}
+
+.art__form-item-input-file {
+  display: inline-block;
+  position: absolute;
+  z-index: 100;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.art__file-path-label {
+  display: inline-block;
+  font-size: .8em;
+  padding-left: .5%;
+}
+
+.art__form-item-ta {
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  background: rgb(245, 245, 245);
+  max-width: 100%;
+  min-width: 100%;
+  height: 190px;
+  min-height: 190px;
+  margin: .3em 0;
+  outline: none;
 }
 
 .art__btn-container {
   width: 100%;
+  padding: 1em 0;
 }
 
 .art__btn {
@@ -87,7 +241,7 @@ input[disabled="disabled"], input[disabled="disabled"]:hover {
   color: white;
   display: inline-block;
   text-transform: uppercase;
-  font-size: 1.1em;
+  font-size: 1em;
   padding: .5em 1.5em;
   box-sizing: border-box;
   box-shadow: 0 14px 28px rgba(180, 180, 180,0.15), 0 10px 10px rgba(180, 180, 180,0.12);

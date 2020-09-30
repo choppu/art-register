@@ -29,6 +29,7 @@ describe("Art contract", () => {
     expect(artEvent.event).to.equal('Art');
     expect(artEvent.eventSignature).to.equal('Art(uint256)');
     artID = artEvent.args[0];
+    console.log(artID);
     expect(await artContract.balanceOf(authorAddress)).to.equal(1);
   });
   it("Create Art with correct tokenURI", async () => {

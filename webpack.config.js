@@ -43,6 +43,14 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
+      filename: 'create.html',
+      template: 'dapp/create.html'
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'arts.html',
+      template: 'dapp/arts.html'
+    }),
+    new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'dapp/index.html'
     })
