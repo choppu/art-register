@@ -1506,6 +1506,11 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
+autobind-decorator@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/autobind-decorator/-/autobind-decorator-2.4.0.tgz#ea9e1c98708cf3b5b356f7cf9f10f265ff18239c"
+  integrity sha512-OGYhWUO72V6DafbF8PM8rm3EPbfuyMZcJhtm5/n26IDwO18pohE4eNazLoCGhPiXOCD0gEGmrbU3849QvM8bbw==
+
 aws-sign2@~0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.7.0.tgz#b46e890934a9591f2d2f6f86d7e6a9f1b3fe76a8"
@@ -6409,6 +6414,13 @@ it-to-stream@^0.1.1:
     p-defer "^3.0.0"
     p-fifo "^1.0.0"
     readable-stream "^3.6.0"
+
+jodit@^3.4.27:
+  version "3.4.27"
+  resolved "https://registry.yarnpkg.com/jodit/-/jodit-3.4.27.tgz#c042f3b15bd575673f2559e95853bbd0f64a1756"
+  integrity sha512-l08WgJS2V/QJM8fq43Pzh7BF8V6fC1R7REtK7dH7yNkh5fN7mB0VWfwPQat+CgtXnC4jD61m74gQwOJmVq0AAA==
+  dependencies:
+    autobind-decorator "^2.4.0"
 
 js-sha3@0.5.7, js-sha3@^0.5.7:
   version "0.5.7"

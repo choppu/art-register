@@ -50,9 +50,8 @@ table {
 }
 
 a {
-  font: inherit;
-  color: inherit;
-  text-decoration: none;
+  color: rgb(14, 78, 87);
+  text-decoration: underline;
 }
 
 input[disabled="disabled"], input[disabled="disabled"]:hover {
@@ -123,10 +122,13 @@ input[disabled="disabled"], input[disabled="disabled"]:hover {
 .art__menu-list-item-link {
   text-transform: uppercase;
   font-size: .85em;
+  color: rgb(55, 55, 55);
+  text-decoration: none;
 }
 
 .art__menu-list-item-link:hover {
   border-bottom: solid 1px rgb(31, 91, 99);
+  text-decoration: none;
 }
 
 .art__form-container {
@@ -223,8 +225,8 @@ input[disabled="disabled"], input[disabled="disabled"]:hover {
   background: rgb(245, 245, 245);
   max-width: 100%;
   min-width: 100%;
-  height: 190px;
-  min-height: 190px;
+  height: 230px;
+  min-height: 230px;
   margin: .3em 0;
   outline: none;
 }
@@ -249,12 +251,127 @@ input[disabled="disabled"], input[disabled="disabled"]:hover {
 }
 
 .art__btn:hover {
-  background: rgb(43, 102, 112);
   background: rgb(100, 139, 145);
 }
 
 .art__btn:disabled {
-  background: rgb(43, 102, 112);
   background: rgb(100, 139, 145);
   cursor: default;
+}
+
+.jodit-wysiwyg ul, .jodit-wysiwyg ol {
+  padding-left: 1.5em !important;
+  box-sizing: border-box !important;
+}
+
+.jodit-toolbar__box:not(:empty) {
+  background-color: rgb(14, 78, 87);
+  border-radius: 0;
+  border: none;
+}
+
+.jodit-container:not(.jodit_inline) {
+  border: none;
+  background: rgb(245, 245, 245);
+  line-height: 1.6em;
+}
+
+.jodit-toolbar__box:not(:empty) {
+  border: none;
+  border-radius: 0;
+} 
+
+.jodit-toolbar-button {
+  border-radius: 0;
+  border: none;
+}
+
+.jodit-icon {
+  fill: white;
+}
+
+.jodit-toolbar-button__trigger svg {
+  fill: white;
+}
+
+.jodit-toolbar-button__button:hover {
+  background: rgba(255, 255, 255, .3) !important;
+}
+
+.jodit-popup__content {
+  background: rgb(66, 108, 114);
+  color: white;
+}
+
+.jodit-toolbar-button__text {
+  color: white;
+}
+
+.jodit-toolbar-button__button, .jodit-toolbar-button__trigger {
+  border-radius: 0 !important;
+}
+
+.jodit-toolbar-button__button:hover, .jodit-toolbar-button__trigger:hover {
+  background: rgba(255, 255, 255, .3) !important;
+}
+
+.jodit-ui-group {
+  background: none;
+} 
+
+.jodit-toolbar-button__text, .jodit-toolbar-button__text:not(:empty), .jodit-ui-button__text, .jodit-ui-button__text:not(:empty) {
+  font-family: 'Antic Didone', serif;
+  color: white;
+  font-size: .9em;
+}
+
+.jodit-container:not(.jodit_inline) .jodit-workplace {
+  font-size: .85em !important;
+}
+
+.art__main-container h1 {
+  font-size: 2em !important;
+  font-weight: bold;
+}
+
+.art__main-container h2 {
+  font-size: 1.8 !important;
+  font-weight: bold;
+}
+
+.art__main-container h3 {
+  font-size: 1.6 !important;
+  font-weight: bold;
+}
+
+.art__main-container h4 {
+  font-size: 1em !important;
+  font-weight: bold;
+}
+
+.art__main-container b, .art__main-container strong {
+  font-weight: bold !important;
+}
+
+.jodit-dialog__box, .jodit-dialog {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.jodit-dialog__footer button {
+  background: rgb(14, 78, 87);
+  border-radius: 0;
+}
+
+.jodit-dialog__box .jodit-dialog__footer {
+  padding: 8px;
+  justify-content: center;
+  flex-wrap: nowrap;
+  display: none;
+}
+
+.jodit-ui-button_status_primary:hover, .jodit-dialog__box button:hover {
+  background: rgb(65, 89, 92) !important;
+  border-radius: 0;
 }

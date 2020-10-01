@@ -1,8 +1,10 @@
+import "../node_modules/jodit/build/jodit.min.css"
 import "./css/app.css";
 
 const artArtifact = require("../artifacts/ArtItem.json");
 const { ethers } = require("ethers");
 const WAValidator = require('@swyftx/api-crypto-address-validator');
+const { Jodit } = require("jodit")
 
 const IpfsHttpClient = require('ipfs-http-client');
 const ipfs = IpfsHttpClient({url: 'http://127.0.0.1:5001'});
@@ -41,6 +43,21 @@ export async function registerArt() : Promise<void> {
   let filePath = document.getElementById("file-path-label");
   let today = new Date();
   let imgData: string;
+
+  let editor = new Jodit(description, {
+  "toolbarButtonSize": "small",
+  "defaultMode": "1",
+  "toolbarSticky": false,
+  "showCharsCounter": false,
+  "showXPathInStatusbar": false,
+  "height": 270,
+  "minHeight": 270,
+  "buttons": ",,,,,,,,|,ul,ol,|,outdent,indent,|,font,fontsize,brush,paragraph,|,table,link,|,align,undo,redo,\n,selectall,cut,copy,paste,copyformat,|,hr,symbol,preview,find",
+  "buttonsMD": "bold,,brush,paragraph,eraser,\n,align,|,undo,redo,|,dots",
+  "buttonsSM": "bold,,brush,paragraph,eraser,\n,align,|,undo,redo,|,dots",
+  "buttonsXS": ",|,brush,paragraph,eraser,\n,align,|,undo,redo,|,dots"
+  });
+  editor.value = '<p></p>';
 
   imgDefault.src = bgImg.default;
 
