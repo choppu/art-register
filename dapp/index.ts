@@ -3,9 +3,7 @@ import "./css/app.css";
 
 const artArtifact = require("../artifacts/ArtItem.json");
 const { ethers } = require("ethers");
-const WAValidator = require('@swyftx/api-crypto-address-validator');
 const { Jodit } = require("jodit");
-
 const IpfsHttpClient = require('ipfs-http-client');
 const crypto = require('crypto');
 const artContractAddress = '0x7c2C195CD6D34B8F845992d380aADB2730bB9C6F';
@@ -23,11 +21,9 @@ export async function init() : Promise<void> {
   artContract = new ethers.Contract(artContractAddress, artArtifact.abi, signer);
 
   let baseUrl = await artContract.baseURI();
-  console.log(baseUrl);
   let ipfs = IpfsHttpClient({url: baseUrl});
   let registerArtPage = document.getElementById("create-art-page");
   let ownedArtsPage = document.getElementById("my-arts-page");
-  //let factory = new ethers.ContractFactory(artArtifact.abi, artArtifact.bytecode, signer);
 
   await artContract.on("Art", (res: any) => {
     console.log(res);
@@ -36,7 +32,7 @@ export async function init() : Promise<void> {
   if(registerArtPage) {
     registerArt(ipfs);
   } else if(ownedArtsPage) {
-    renderOwnedArts(signer, artContract, ipfs);
+    getOwnedArts(signer, artContract, ipfs);
   }
 }
 
@@ -92,7 +88,7 @@ export async function registerArt(ipfs: any) : Promise<void> {
   });
 }
 
-async function renderOwnedArts(signer: any, contract: any, ipfs: any) : Promise<void> {
+async function getOwnedArts(signer: any, contract: any, ipfs: any) : Promise<void> {
   let imgDefault = document.getElementById("my-arts-img-default") as HTMLImageElement;
   let signerAddr = await signer.getAddress();
   let ownedArts = await contract.tokensOfOwner(signerAddr);
@@ -102,14 +98,20 @@ async function renderOwnedArts(signer: any, contract: any, ipfs: any) : Promise<
   for(let i = 0; i < ownedArts.length; i++) {
     let tokenUrl = await contract.tokenURI(ownedArts[i]);
     let cid = tokenUrl.slice(tokenUrl.lastIndexOf('/') + 1);
-    let stream = ipfs.cat(cid);
-    let data = '';
-
-    for await (const chunk of stream) {
-      data += utf8Decoder.decode(chunk);
-    }
-    console.log(data);
+    let dataJSON = await readIPFSContent(ipfs, cid);
+    renderOwnedArts(dataJSON);
   }
+}
+
+async function readIPFSContent(ipfs: any, cid: string) : Promise<string> {
+  let stream = ipfs.cat(cid);
+  let data = '';
+
+  for await (const chunk of stream) {
+    data += utf8Decoder.decode(chunk);
+  }
+  
+  return data;
 }
 
 async function addToIPFS(ipfs: any, data: any, fileName: string) : Promise<string> {
@@ -122,6 +124,10 @@ async function addToIPFS(ipfs: any, data: any, fileName: string) : Promise<strin
 
   let content = await ipfs.add(file);
   return content.cid.string;
+}
+
+function renderOwnedArts(data: string) : void {
+  
 }
 
 async function encodeThumb(fileInput: HTMLInputElement, imgEl: HTMLImageElement) : Promise<any> {
