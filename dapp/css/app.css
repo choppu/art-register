@@ -74,6 +74,7 @@ input[disabled="disabled"], input[disabled="disabled"]:hover {
   width: 45%;
   height: 100vh;
   overflow: hidden;
+  position: relative;
 }
 
 .art__right-container {
@@ -82,58 +83,66 @@ input[disabled="disabled"], input[disabled="disabled"]:hover {
 }
 
 .art__thumb-default-img {
-  width: 100%;
+  width: 45%;
+  position: fixed;
+}
+
+.art__header {
+  position: fixed;
+  z-index: 333;
+  top: 0;
+  width: 45%;
 }
 
 .art__menu-list-container {
-  width: 100%;
+  float: left;
+  padding: 0 2em;
   margin: 1.5em 0;
   box-sizing: border-box;
-  padding-right: 10%;
   font-family: 'Limelight', cursive;
 }
 
 .art__menu-1 {
   font-size: 1.2em;
+  width: 200px;
 }
 
 .art__menu-2 {
   font-size: 1.4em;
+  width: 250px;
 }
 
 .art__menu-3 {
   font-size: 1.6em;
+  width: 300px;
 }
 
 .art__menu-list {
-  width: 90%;
-  padding: 1em 0;
   box-sizing: border-box;
-  text-align: right;
-  margin-right: 10%;
 }
 
 .art__menu-list-item {
-  display: inline-block;
+  display: block;
   box-sizing: border-box;
-  padding: .2em 0 .2em 1em;
+  background: black;
+  padding: .5em 1em;
+  margin: .3em 0;
 }
 
 .art__menu-list-item-link {
   text-transform: uppercase;
   font-size: .85em;
-  color: rgb(55, 55, 55);
+  color: white;
   text-decoration: none;
 }
 
 .art__menu-list-item-link:hover {
-  border-bottom: solid 1px rgb(31, 91, 99);
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .art__form-container {
   width: 90%;
-  margin-top: 4em;
+  margin-top: 6em;
   box-sizing: border-box;
   float: right;
   padding-right: 20%;

@@ -10,7 +10,8 @@ contract ArtItem is Ownable, ERC721 {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
-    mapping (uint256 => address) private authors;
+    mapping (uint256 => address) public registants;
+    mapping (string => uint256) public cids;
 
     event Art(uint256 _artId);
 
@@ -22,9 +23,32 @@ contract ArtItem is Ownable, ERC721 {
         uint256 _newItemId = _tokenIds.current();
         _safeMint(msg.sender, _newItemId);
         _setTokenURI(_newItemId, _cid);
-        authors[_newItemId] = msg.sender;
+        registants[_newItemId] = msg.sender;
+        cids[_cid] = _newItemId;
   
         emit Art(_newItemId);
+    }
+
+    function tokensOfOwner(address _owner) external view returns( uint256[] memory ownerTokens) {
+        uint256 tokenCount = balanceOf(_owner);
+
+        if (tokenCount == 0) {
+            return new uint256[](0);
+        } else {
+            uint256[] memory result = new uint256[](tokenCount);
+            uint256 totalArts = totalSupply();
+            uint256 resultIndex = 0;
+            uint256 artId;
+
+            for (artId = 1; artId <= totalArts; artId++) {
+                if (ownerOf(artId) == _owner) {
+                    result[resultIndex] = artId;
+                    resultIndex++;
+                }
+            }
+
+            return result;
+        }
     }
 
     function setBaseURL(string memory _baseURL) public onlyOwner {
