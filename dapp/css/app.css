@@ -384,3 +384,53 @@ input[disabled="disabled"], input[disabled="disabled"]:hover {
   background: rgb(65, 89, 92) !important;
   border-radius: 0;
 }
+
+.art__my-arts-list {
+  width: 85%;
+  margin-right: 15%;
+  padding: 2em 0;
+  box-sizing: border-box;
+}
+
+.art__my-arts-list-element {
+  width: 100%;
+  display: block;
+  border-bottom: solid black 2px;
+  margin: .2em 0;
+}
+
+.art__my-arts-list-element-el {
+  display: inline-block;
+  width: 32.6%;
+}
+
+.art__art-name {
+  font-weight: bold;
+  background: rgb(14, 78, 87);
+  color: white;
+  padding: .7em 1em;
+  box-sizing: border-box;
+  font-family: 'Limelight', cursive;
+  text-transform: uppercase;
+  font-size: .85em;
+}
+
+.art__author-name {
+  padding: .7em 0 .7em 2em;
+  box-sizing: border-box;
+  font-size: .85em;
+}
+
+.art__my-arts-btn-container {
+  text-align: right;
+}
+
+.art__my-arts-btn {
+  font-family: 'Material Icons Outlined';
+  color: rgb(14, 78, 87);
+  background: none;
+  border: none;
+  font-size: 1.1em;
+  padding-left: .5em;
+  box-sizing: border-box;
+}

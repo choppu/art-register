@@ -92,6 +92,7 @@ async function getOwnedArts(signer: any, contract: any, ipfs: any) : Promise<voi
   let imgDefault = document.getElementById("my-arts-img-default") as HTMLImageElement;
   let signerAddr = await signer.getAddress();
   let ownedArts = await contract.tokensOfOwner(signerAddr);
+  let list = document.getElementById("my-arts-list") as HTMLUListElement;
   
   imgDefault.src = bgImg.default;
 
@@ -99,7 +100,7 @@ async function getOwnedArts(signer: any, contract: any, ipfs: any) : Promise<voi
     let tokenUrl = await contract.tokenURI(ownedArts[i]);
     let cid = tokenUrl.slice(tokenUrl.lastIndexOf('/') + 1);
     let dataJSON = await readIPFSContent(ipfs, cid);
-    renderOwnedArts(dataJSON);
+    renderOwnedArt(dataJSON, list, i, ownedArts[i]);
   }
 }
 
@@ -126,8 +127,22 @@ async function addToIPFS(ipfs: any, data: any, fileName: string) : Promise<strin
   return content.cid.string;
 }
 
-function renderOwnedArts(data: string) : void {
-  
+function renderOwnedArt(data: string, list: HTMLUListElement, i: number, artId: any) : void {
+  let art = document.createElement("li");
+  let artData = JSON.parse(data);
+  let artIdString = artId.toString();
+
+  art.classList.add("art__my-arts-list-element");
+  art.id = `art-${i}`;
+  art.innerHTML = 
+  `<span class="art__art-name art__my-arts-list-element-el">${artData.name}</span>
+  <span class="art__author-name art__my-arts-list-element-el">${artData.author}</span>
+  <span class="art__my-arts-btn-container art__my-arts-list-element-el">
+  <button class="art__my-arts-btn" id="art-${i}-view-btn" data-art-id="${artIdString}">&#xe8f4</button>
+  <button class="art__my-arts-btn" id="art-${i}-transfer-btn" data-art-id="${artIdString}">&#xe163</button>
+  </span>`;
+
+  list.appendChild(art);  
 }
 
 async function encodeThumb(fileInput: HTMLInputElement, imgEl: HTMLImageElement) : Promise<any> {
