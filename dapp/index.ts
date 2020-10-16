@@ -24,6 +24,7 @@ export async function init() : Promise<void> {
   let ipfs = IpfsHttpClient({url: baseUrl});
   let registerArtPage = document.getElementById("create-art-page");
   let ownedArtsPage = document.getElementById("my-arts-page");
+  let artPage = document.getElementById("my-art-page");
 
   await artContract.on("Art", (res: any) => {
     console.log(res);
@@ -33,6 +34,8 @@ export async function init() : Promise<void> {
     registerArt(ipfs);
   } else if(ownedArtsPage) {
     getOwnedArts(signer, artContract, ipfs);
+  } else if(artPage) {
+    renderArt(artContract, ipfs);
   }
 }
 
@@ -97,11 +100,32 @@ async function getOwnedArts(signer: any, contract: any, ipfs: any) : Promise<voi
   imgDefault.src = bgImg.default;
 
   for(let i = 0; i < ownedArts.length; i++) {
-    let tokenUrl = await contract.tokenURI(ownedArts[i]);
-    let cid = tokenUrl.slice(tokenUrl.lastIndexOf('/') + 1);
-    let dataJSON = await readIPFSContent(ipfs, cid);
-    renderOwnedArt(dataJSON, list, i, ownedArts[i]);
+    let dataJSON = await readArtMetadata(contract, ipfs, ownedArts[i]);
+    renderOwnedArt(dataJSON, list, i, ownedArts[i], imgDefault);
   }
+}
+
+async function renderArt(contract: any, ipfs: any) : Promise<void> {
+  let artId = window.location.hash.slice(1);
+  let data = await readArtMetadata(contract, ipfs, artId);
+  let artImg = document.getElementById("art-meta-img") as HTMLImageElement;
+  let artAuthor = document.getElementById("art-meta-author");
+  let artName = document.getElementById("art-meta-name");
+  let artCreation = document.getElementById("art-meta-creation");
+  let artDetails = document.getElementById("meta-details-container");
+
+  artImg.src = data.image;
+  artAuthor.innerHTML = data.author;
+  artName.innerHTML = data.name;
+  artCreation.innerHTML = data.date.slice(0, data.date.indexOf("-"));
+  artDetails.innerHTML = data.description;
+}
+
+async function readArtMetadata(contract: any, ipfs: any, artId: number | string) : Promise<any> {
+  let tokenUrl = await contract.tokenURI(artId);
+  let cid = tokenUrl.slice(tokenUrl.lastIndexOf('/') + 1);
+  let data = await readIPFSContent(ipfs, cid)
+  return JSON.parse(data);
 }
 
 async function readIPFSContent(ipfs: any, cid: string) : Promise<string> {
@@ -127,18 +151,22 @@ async function addToIPFS(ipfs: any, data: any, fileName: string) : Promise<strin
   return content.cid.string;
 }
 
-function renderOwnedArt(data: string, list: HTMLUListElement, i: number, artId: any) : void {
+function renderOwnedArt(data: any, list: HTMLUListElement, i: number, artId: any, img: HTMLImageElement) : void {
   let art = document.createElement("li");
-  let artData = JSON.parse(data);
   let artIdString = artId.toString();
+
+  art.addEventListener("mouseover", (e) => {
+    img.src = data.image;
+    e.preventDefault();
+  });
 
   art.classList.add("art__my-arts-list-element");
   art.id = `art-${i}`;
   art.innerHTML = 
-  `<span class="art__art-name art__my-arts-list-element-el">${artData.name}</span>
-  <span class="art__author-name art__my-arts-list-element-el">${artData.author}</span>
+  `<span class="art__art-name art__my-arts-list-element-el">${data.name}</span>
+  <span class="art__author-name art__my-arts-list-element-el">${data.author}</span>
   <span class="art__my-arts-btn-container art__my-arts-list-element-el">
-  <button class="art__my-arts-btn" id="art-${i}-view-btn" data-art-id="${artIdString}">&#xe8f4</button>
+  <a class="art__my-arts-btn art__art-view-link" href="art.html#${artId}" id="art-${i}-view-btn" data-art-id="${artIdString}">&#xe8f4</button>
   <button class="art__my-arts-btn" id="art-${i}-transfer-btn" data-art-id="${artIdString}">&#xe163</button>
   </span>`;
 

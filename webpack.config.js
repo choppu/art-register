@@ -53,6 +53,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'dapp/index.html'
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'art.html',
+      template: 'dapp/art.html'
     })
   ]  
 };

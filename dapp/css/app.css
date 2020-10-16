@@ -74,7 +74,10 @@ input[disabled="disabled"], input[disabled="disabled"]:hover {
   width: 45%;
   height: 100vh;
   overflow: hidden;
-  position: relative;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  background: rgb(245, 245, 245);
 }
 
 .art__right-container {
@@ -83,8 +86,7 @@ input[disabled="disabled"], input[disabled="disabled"]:hover {
 }
 
 .art__thumb-default-img {
-  width: 45%;
-  position: fixed;
+  width: 100%;
 }
 
 .art__header {
@@ -433,4 +435,72 @@ input[disabled="disabled"], input[disabled="disabled"]:hover {
   font-size: 1.1em;
   padding-left: .5em;
   box-sizing: border-box;
+}
+
+.art__art-view-link, .art__art-view-link:hover {
+  text-decoration: none;
+}
+
+.art__art-page-menu {
+  margin-left: 11%;
+}
+
+.art__art-image-container {
+  width: 50%;
+  height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  float: right;
+}
+
+.art__art-meta-image {
+  width: 70%;
+}
+
+.art__art-meta-description-container {
+  float: left;
+  width: 38%;
+  margin-left: 10%;
+  box-sizing: border-box;
+  margin-top: 20%;
+}
+
+.art__meta-author {
+  font-size: 2.4em;
+  font-family: 'Limelight', serif;
+  display: inline-block;
+  color: white;
+  background: rgb(14, 78, 87);
+  padding: .5em;
+  margin-bottom: 1.2em;
+}
+
+.art__meta-name {
+  font-size: 1.9em;
+  font-family: 'Gentium Book Basic', serif;
+  padding-bottom: .2em;
+}
+
+.art__meta-creation {
+  font-weight: bold;
+  padding-bottom: .5em;
+  border-bottom: solid rgb(55, 55, 55) 1px;
+  width: 60%;
+  margin-bottom: 1.5em;
+}
+
+.art__art-meta-details-container {
+  width: 90%;
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.art__art-meta-details-container * {
+  font-family: 'Antic Didone', serif !important;
+}
+
+.art__art-meta-details-container a {
+  color: rgb(14, 78, 87) !important;
 }
