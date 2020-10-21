@@ -452,17 +452,18 @@ input[disabled="disabled"], input[disabled="disabled"]:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  float: right;
+  float: left;
 }
 
 .art__art-meta-image {
-  width: 70%;
+  width: 75%;
 }
 
 .art__art-meta-description-container {
-  float: left;
-  width: 38%;
-  margin-left: 10%;
+  float: right;
+  width: 40%;
+  margin-left: 3%;
+  margin-right: 7%;
   box-sizing: border-box;
   margin-top: 20%;
 }
@@ -470,31 +471,43 @@ input[disabled="disabled"], input[disabled="disabled"]:hover {
 .art__meta-author {
   font-size: 2.4em;
   font-family: 'Limelight', serif;
-  display: inline-block;
+  display: block;
   color: white;
   background: rgb(14, 78, 87);
   padding: .5em;
   margin-bottom: 1.2em;
+  text-align: right;
+  width: 73%;
+  margin-left: 27%;
+  box-sizing: border-box;
 }
 
 .art__meta-name {
   font-size: 1.9em;
   font-family: 'Gentium Book Basic', serif;
-  padding-bottom: .2em;
+  padding-bottom: .4em;
+  text-align: right;
+  display: block;
+  width: 85%;
+  margin-left: 15%;
 }
 
 .art__meta-creation {
+  width: 60%;
+  margin-left: 40%;
   font-weight: bold;
   padding-bottom: .5em;
   border-bottom: solid rgb(55, 55, 55) 1px;
-  width: 60%;
   margin-bottom: 1.5em;
+  text-align: right;
+  display: block;
 }
 
 .art__art-meta-details-container {
-  width: 90%;
   height: 300px;
   overflow-y: scroll;
+  display: block;
+  text-align: justify;
 }
 
 .art__art-meta-details-container * {

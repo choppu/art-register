@@ -7,7 +7,8 @@
   "scripts": {
     "test": "buidler test",
     "dev": "webpack --mode development",
-    "start": "webpack-dev-server --mode development --open",
+    "deploy": "npx buidler run --network localhost scripts/deploy.js",
+    "start": "yarn deploy && webpack-dev-server --mode development --open",
     "build": "buidler compile && webpack --mode production"
   },
   "devDependencies": {
