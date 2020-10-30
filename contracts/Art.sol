@@ -12,12 +12,13 @@ contract ArtItem is Ownable, ERC721 {
 
     mapping (uint256 => address) public registants;
     mapping (string => uint256) public cids;
+    mapping (address => uint256) private certificates;
 
     event Art(uint256 _artId);
 
     constructor() public ERC721("ArtItem", "AIT") {}
 
-    function createArt(string memory _cid) public {
+    function createArt(string memory _cid, address _certificate) public {
         _tokenIds.increment();
 
         uint256 _newItemId = _tokenIds.current();
@@ -25,6 +26,10 @@ contract ArtItem is Ownable, ERC721 {
         _setTokenURI(_newItemId, _cid);
         registants[_newItemId] = msg.sender;
         cids[_cid] = _newItemId;
+
+        if (_certificate != address(0)) {
+            certificates[_certificate] = _newItemId;
+        }
   
         emit Art(_newItemId);
     }

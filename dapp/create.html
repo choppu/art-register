@@ -27,6 +27,10 @@
           <input type="date" name="art-date" id="art-date" class="art__form-item-input-date art__form-item" required>
         </div>
         <div class="art__form-item-container group">
+          <label for="art-certificate" class="art__form-item-label">Certificate</label>
+          <input type="text" name="art-certificate" id="art-certificate" class="art__form-item-input art__form-item" placeholder="Certificate">
+        </div>
+        <div class="art__form-item-container group">
           <label for="art-thumb" class="art__form-item-label">Thumbnail</label>
           <div class="art__file-field group">
             <span class="art__input-file-label">
@@ -42,6 +46,9 @@
         </div>
         <div class="art__btn-container">
           <button class="art__btn" id="register-btn">Create</button>
+        </div>
+        <div class="art__form-item-container">
+          <span id="error-msg" class="art__error"></span>
         </div>
       </div>
     </div>

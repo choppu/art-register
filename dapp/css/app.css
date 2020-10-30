@@ -421,10 +421,7 @@ input[disabled="disabled"], input[disabled="disabled"]:hover {
   padding: .7em 0 .7em 2em;
   box-sizing: border-box;
   font-size: .85em;
-}
-
-.art__my-arts-btn-container {
-  text-align: right;
+  width: 54%;
 }
 
 .art__my-arts-btn {
@@ -435,6 +432,8 @@ input[disabled="disabled"], input[disabled="disabled"]:hover {
   font-size: 1.1em;
   padding-left: .5em;
   box-sizing: border-box;
+  outline: none;
+  cursor: pointer;
 }
 
 .art__art-view-link, .art__art-view-link:hover {
@@ -516,4 +515,36 @@ input[disabled="disabled"], input[disabled="disabled"]:hover {
 
 .art__art-meta-details-container a {
   color: rgb(14, 78, 87) !important;
+}
+
+.art__transfer-art-container {
+  background: rgba(0, 0, 0, .83);
+  z-index: 22;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .5s, visibility .5s;
+}
+
+.art__transfer-form {
+  width: 35%;
+  margin: 0 auto;
+  background: white;
+  box-sizing: border-box;
+  padding: 2% 3%;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0,0.12);
+}
+
+.art__transfer-form-item-input {
+  margin: 2em 0;
+}
+
+.art__display-none {
+  opacity: 0;
+  visibility: hidden;
+  display: hidden;
 }

@@ -9,6 +9,7 @@ const crypto = require('crypto');
 const artContractAddress = '0x7c2C195CD6D34B8F845992d380aADB2730bB9C6F';
 const bgImg =  require("../dapp/img/bg.png");
 const utf8Decoder = new TextDecoder('utf-8');
+const WAValidator = require('@swyftx/api-crypto-address-validator');
 
 let provider: any;
 let signer: any;
@@ -45,9 +46,11 @@ export async function registerArt(ipfs: any) : Promise<void> {
   let title = document.getElementById("art-title") as HTMLInputElement;
   let author = document.getElementById("art-author") as HTMLInputElement;
   let date = document.getElementById("art-date") as HTMLInputElement;
+  let certificate = document.getElementById("art-certificate") as HTMLInputElement;
   let thumb = document.getElementById("art-thumb") as HTMLInputElement;
   let description = document.getElementById("art-description") as HTMLTextAreaElement;
   let filePath = document.getElementById("file-path-label");
+  let errorMsg = document.getElementById("error-msg");
   let today = new Date();
   let imgData: string;
 
@@ -86,7 +89,13 @@ export async function registerArt(ipfs: any) : Promise<void> {
     };
 
     let cid = await addToIPFS(ipfs, JSON.stringify(data), title.value);
-    await artContract.createArt(cid);
+
+    if (WAValidator.validate(certificate.value, 'eth') || certificate.value == '') {
+      certificate.value ? await artContract.createArt(cid, certificate.value) : await artContract.createArt(cid, '0x00');
+    } else {
+      errorMsg.innerHTML = "Certificate is invalid. Please try again."
+    }
+    
     e.preventDefault();
   });
 }
@@ -101,7 +110,7 @@ async function getOwnedArts(signer: any, contract: any, ipfs: any) : Promise<voi
 
   for(let i = 0; i < ownedArts.length; i++) {
     let dataJSON = await readArtMetadata(contract, ipfs, ownedArts[i]);
-    renderOwnedArt(dataJSON, list, i, ownedArts[i], imgDefault);
+    renderOwnedArt(dataJSON, list, i, ownedArts[i], imgDefault, contract, signerAddr);
   }
 }
 
@@ -119,6 +128,18 @@ async function renderArt(contract: any, ipfs: any) : Promise<void> {
   artName.innerHTML = data.name;
   artCreation.innerHTML = data.date.slice(0, data.date.indexOf("-"));
   artDetails.innerHTML = data.description;
+}
+
+async function addToIPFS(ipfs: any, data: any, fileName: string) : Promise<string> {
+  let path = crypto.createHash('md5').update(fileName).digest('hex') + '.json';
+
+  let file = {
+    "path": path,
+    "content": data
+  }
+
+  let content = await ipfs.add(file);
+  return content.cid.string;
 }
 
 async function readArtMetadata(contract: any, ipfs: any, artId: number | string) : Promise<any> {
@@ -139,21 +160,15 @@ async function readIPFSContent(ipfs: any, cid: string) : Promise<string> {
   return data;
 }
 
-async function addToIPFS(ipfs: any, data: any, fileName: string) : Promise<string> {
-  let path = crypto.createHash('md5').update(fileName).digest('hex') + '.json';
-
-  let file = {
-    "path": path,
-    "content": data
-  }
-
-  let content = await ipfs.add(file);
-  return content.cid.string;
-}
-
-function renderOwnedArt(data: any, list: HTMLUListElement, i: number, artId: any, img: HTMLImageElement) : void {
+function renderOwnedArt(data: any, list: HTMLUListElement, i: number, artId: any, img: HTMLImageElement, contract: any, owner: any) : void {
   let art = document.createElement("li");
   let artIdString = artId.toString();
+
+  let transferBtn = document.createElement("button");
+  transferBtn.innerHTML = '&#xe040';
+  transferBtn.classList.add("art__my-arts-btn");
+  transferBtn.id = `art-${i}-transfer-btn`;
+  transferBtn.dataset.artId = `${artIdString}`;
 
   art.addEventListener("mouseover", (e) => {
     img.src = data.image;
@@ -165,12 +180,45 @@ function renderOwnedArt(data: any, list: HTMLUListElement, i: number, artId: any
   art.innerHTML = 
   `<span class="art__art-name art__my-arts-list-element-el">${data.name}</span>
   <span class="art__author-name art__my-arts-list-element-el">${data.author}</span>
-  <span class="art__my-arts-btn-container art__my-arts-list-element-el">
-  <a class="art__my-arts-btn art__art-view-link" href="art.html#${artId}" id="art-${i}-view-btn" data-art-id="${artIdString}">&#xe8f4</button>
-  <button class="art__my-arts-btn" id="art-${i}-transfer-btn" data-art-id="${artIdString}">&#xe163</button>
-  </span>`;
+  <a class="art__my-arts-btn art__art-view-link" href="art.html#${artId}" id="art-${i}-view-btn" data-art-id="${artIdString}">&#xe8f4</a>`;
+
+  art.append(transferBtn);
+
+  transferBtn.addEventListener("click", (e) => {
+    transferArt(artId, contract, owner);
+    e.preventDefault();
+  });
 
   list.appendChild(art);  
+}
+
+async function transferArt(artId: any, contract: any, ownerAddress: any) : Promise<void> {
+  let transferArtContainer = document.getElementById("transfer-container");
+  let addressTo = document.getElementById("art-transfer-to") as HTMLInputElement;
+  let transferBtn = document.getElementById("transfer-btn");
+
+  transferArtContainer.classList.remove("art__display-none");
+  transferArtContainer.classList.add("art__transfer-art-container");
+
+  addressTo.addEventListener("input", (e) => {
+    WAValidator.validate(addressTo.value, 'eth') ? transferBtn.removeAttribute("disabled") : transferBtn.setAttribute("disabled", "disabled");
+    e.preventDefault();
+  });
+
+  transferBtn.addEventListener("click", async (e) => {
+    await contract.transferFrom(ownerAddress, addressTo.value, artId);
+    transferArtContainer.classList.add("art__display-none");
+    transferArtContainer.classList.remove("art__transfer-art-container");
+    e.preventDefault();
+  });
+
+  document.addEventListener("keyup", (e) => {
+    if (e.key === "Escape") {
+      transferArtContainer.classList.add("art__display-none");
+      transferArtContainer.classList.remove("art__transfer-art-container");
+    } 
+    e.preventDefault();
+  })
 }
 
 async function encodeThumb(fileInput: HTMLInputElement, imgEl: HTMLImageElement) : Promise<any> {
